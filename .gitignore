@@ -1,2 +1,6 @@
 ideas.txt
 tiny-AES-c/
+test_aes*
+*.o
+.vscode
+test
