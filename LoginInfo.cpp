@@ -94,3 +94,12 @@ std::uint16_t LoginInfo::GetExtraInfoLength()
 {
     return this->extraInfoLength;
 }
+
+std::uint16_t LoginInfo::GetSize()
+{
+    // Returns the size of all class member variables in bytes
+    std::uint16_t size = 4 * sizeof(std::uint16_t); // The size of the length member variables
+    size += this->platformLength + this->usernameLength + this->passwordLength + this->extraInfoLength;
+
+    return size;
+}

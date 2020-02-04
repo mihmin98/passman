@@ -27,6 +27,8 @@ public:
     std::uint16_t GetPasswordLength();
     std::uint16_t GetExtraInfoLength();
 
+    std::uint16_t GetSize();
+
 private:
     std::string platform;
     std::string username;
