@@ -1,5 +1,6 @@
 ideas.txt
 tiny-AES-c/
+crypto-algorithms
 test_aes*
 *.o
 .vscode
