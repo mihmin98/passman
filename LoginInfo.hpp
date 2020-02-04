@@ -3,6 +3,7 @@
 
 #pragma once
 #include <cstdint>
+#include <cstring>
 #include <string>
 
 class LoginInfo
@@ -28,6 +29,7 @@ public:
     std::uint16_t GetExtraInfoLength();
 
     std::uint16_t GetSize();
+    std::uint8_t *Serialize();
 
 private:
     std::string platform;

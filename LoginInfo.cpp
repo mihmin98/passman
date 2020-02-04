@@ -103,3 +103,36 @@ std::uint16_t LoginInfo::GetSize()
 
     return size;
 }
+
+std::uint8_t *LoginInfo::Serialize()
+{
+    // Returns a pointer to the serialized string
+    std::uint8_t *str = new std::uint8_t[this->GetSize()];
+    std::uint8_t *p = str; // A pointer to the current location in the string
+
+    // Platform
+    std::memcpy(p, &(this->platformLength), sizeof(std::uint16_t));
+    p += sizeof(std::uint16_t);
+    std::memcpy(p, this->platform.c_str(), this->platformLength * sizeof(std::uint8_t));
+    p += this->platformLength;
+
+    // Username
+    std::memcpy(p, &(this->usernameLength), sizeof(std::uint16_t));
+    p += sizeof(std::uint16_t);
+    std::memcpy(p, this->username.c_str(), this->usernameLength * sizeof(std::uint8_t));
+    p += this->usernameLength;
+
+    // Password
+    std::memcpy(p, &(this->passwordLength), sizeof(std::uint16_t));
+    p += sizeof(std::uint16_t);
+    std::memcpy(p, this->password.c_str(), this->passwordLength * sizeof(std::uint8_t));
+    p += this->passwordLength;
+
+    // Extra Info
+    std::memcpy(p, &(this->extraInfoLength), sizeof(std::uint16_t));
+    p += sizeof(std::uint16_t);
+    std::memcpy(p, this->extraInfo.c_str(), this->extraInfoLength * sizeof(std::uint8_t));
+    p += this->extraInfoLength;
+
+    return str;
+}
