@@ -12,16 +12,16 @@ public:
     LoginInfo(std::string platform, std::string username, std::string password, std::string extraInfo);
 
     // Setters
-    void setPlatform(std::string platform, bool calcLength = true);
-    void setUsername(std::string username, bool calcLength = true);
-    void setPassword(std::string password, bool calcLength = true);
-    void setExtraInfo(std::string extraInfo, bool calcLength = true);
+    void SetPlatform(std::string platform, bool calcLength = true);
+    void SetUsername(std::string username, bool calcLength = true);
+    void SetPassword(std::string password, bool calcLength = true);
+    void SetExtraInfo(std::string extraInfo, bool calcLength = true);
 
     // Getters
-    std::string getPlatform();
-    std::string getUsername();
-    std::string getPassword();
-    std::string getExtraInfo();
+    std::string GetPlatform();
+    std::string GetUsername();
+    std::string GetPassword();
+    std::string GetExtraInfo();
 
 private:
     std::string platform;
