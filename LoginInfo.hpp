@@ -11,6 +11,7 @@ class LoginInfo
 public:
     LoginInfo();
     LoginInfo(std::string platform, std::string username, std::string password, std::string extraInfo);
+    LoginInfo(std::uint8_t *data);
 
     // Setters
     void SetPlatform(std::string platform, bool calcLength = true);

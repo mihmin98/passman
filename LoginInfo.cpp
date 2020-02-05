@@ -27,6 +27,44 @@ LoginInfo::LoginInfo(std::string platform, std::string username, std::string pas
     this->extraInfoLength = this->extraInfo.length() + 1;
 }
 
+// Deserialization constructor
+LoginInfo::LoginInfo(std::uint8_t *data)
+{
+    std::uint8_t *p = data;
+
+    // Platform
+    this->platformLength = *((std::uint16_t *)((void *)p));
+    p += sizeof(this->platformLength);
+
+    this->platform = std::string(this->platformLength, '0');
+    for (int i = 0; i < this->platformLength; i++, p++)
+        this->platform[i] = *p;
+
+    // Username
+    this->usernameLength = *((std::uint16_t *)((void *)p));
+    p += sizeof(this->usernameLength);
+
+    this->username = std::string(this->usernameLength, '0');
+    for (int i = 0; i < this->usernameLength; i++, p++)
+        this->username[i] = *p;
+
+    // Password
+    this->passwordLength = *((std::uint16_t *)((void *)p));
+    p += sizeof(this->passwordLength);
+
+    this->password = std::string(this->passwordLength, '0');
+    for (int i = 0; i < this->passwordLength; i++, p++)
+        this->password[i] = *p;
+
+    // Extra Info
+    this->extraInfoLength = *((std::uint16_t *)((void *)p));
+    p += sizeof(this->extraInfoLength);
+
+    this->extraInfo = std::string(this->extraInfoLength, '0');
+    for (int i = 0; i < this->extraInfoLength; i++, p++)
+        this->extraInfo[i] = *p;
+}
+
 void LoginInfo::SetPlatform(std::string platform, bool calcLength = true)
 {
     this->platform = platform;
