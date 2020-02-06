@@ -20,19 +20,11 @@ public:
     void SetMenuState(MenuState menuState);
     void ClearScreen();
 
-    virtual void run(MenuContext *context) = 0;
-    virtual void ParseInput(std::string input) = 0;
+    virtual void Run(MenuContext *context) = 0;
+    virtual bool ParseInput(std::string input) = 0;
+
 private:
     MenuState menuState;
 };
 
-class MenuContext
-{
-public:
-    MenuContext();
-    void SetState(Menu *state);
-
-private:
-    Menu *state;
-};
 #endif

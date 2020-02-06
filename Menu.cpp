@@ -23,13 +23,3 @@ void ClearScreen()
     std::system("cls");
 #endif
 }
-
-MenuContext::MenuContext()
-{
-    this->state = new StartMenu();
-}
-
-void MenuContext::SetState(Menu *state)
-{
-    this->state = state;
-}
