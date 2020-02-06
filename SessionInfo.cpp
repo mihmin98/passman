@@ -4,6 +4,7 @@ SessionInfo *SessionInfo::instance = 0;
 
 SessionInfo::SessionInfo()
 {
+    this->sessionStage = SessionStage::BEFORE_DECRYPTION;
     this->username = "";
     this->key = "";
     this->unsavedChanges = false;
@@ -15,6 +16,11 @@ SessionInfo *SessionInfo::GetInstance()
         instance = new SessionInfo();
 
     return instance;
+}
+
+void SessionInfo::SetSessionStage(SessionInfo::SessionStage sessionStage)
+{
+    this->sessionStage = sessionStage;
 }
 
 void SessionInfo::SetUsername(std::string username)
@@ -30,6 +36,11 @@ void SessionInfo::SetKey(std::string key)
 void SessionInfo::SetUnsavedChanges(bool unsavedChanges)
 {
     this->unsavedChanges = unsavedChanges;
+}
+
+SessionInfo::SessionStage SessionInfo::GetSessionStage()
+{
+    return this->sessionStage;
 }
 
 std::string SessionInfo::GetUsername()
