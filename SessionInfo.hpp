@@ -3,6 +3,8 @@
 
 #pragma once
 #include <string>
+#include <vector>
+#include "LoginInfo.hpp"
 
 class SessionInfo
 {
@@ -20,6 +22,7 @@ public:
     void SetUsername(std::string username);
     void SetKey(std::string key);
     void SetUnsavedChanges(bool unsavedChanges);
+    void SetLoginInfoVector(std::vector<LoginInfo> &v);
 
     // Getters
     SessionStage GetSessionStage();
@@ -27,6 +30,15 @@ public:
     std::string GetKey();
     bool GetUnsavedChanges();
     std::string GetFilename();
+    std::vector<LoginInfo *> GetLoginInfoVector();
+
+    // Changes to the LoginInfo vector must be done with these methods
+
+    void AddLoginInfoVector(LoginInfo toAdd);
+    void AddLoginInfoVector(LoginInfo *toAdd);
+    void RemoveLoginInfoVector(LoginInfo toRemove);
+    void RemoveLoginInfoVector(LoginInfo *toRemove);
+    void ClearLoginInfoVector();
 
 private:
     static SessionInfo *instance;
@@ -34,6 +46,7 @@ private:
     std::string username;
     std::string key;
     bool unsavedChanges;
+    std::vector<LoginInfo *> loginInfoVector;
 
     SessionInfo(); // private constructor
 };
