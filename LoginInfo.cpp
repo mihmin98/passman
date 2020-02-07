@@ -174,3 +174,11 @@ std::uint8_t *LoginInfo::Serialize()
 
     return str;
 }
+
+bool operator==(const LoginInfo &a, const LoginInfo &b)
+{
+    return a.platformLength == b.platformLength && a.platform == b.platform &&
+           a.usernameLength == b.usernameLength && a.username == b.username &&
+           a.passwordLength == b.passwordLength && a.password == b.password &&
+           a.extraInfoLength == b.extraInfoLength && a.extraInfo == b.extraInfo;
+}

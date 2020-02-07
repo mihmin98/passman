@@ -32,6 +32,8 @@ public:
     std::uint16_t GetSize();
     std::uint8_t *Serialize();
 
+    friend bool operator==(const LoginInfo &, const LoginInfo &);
+
 private:
     std::string platform;
     std::string username;
