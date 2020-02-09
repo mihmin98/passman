@@ -37,13 +37,13 @@ bool MainMenu::ParseInput(std::string input)
     if (splitInput[0] == "add")
     {
         // Change state to AddMenu
-        this->context->SetState(new AddMenu());
+        this->context->SetState(new AddMenu(context));
         delete this;
     }
     else if (splitInput[0] == "list")
     {
         // Change state to ListMenu
-        this->context->SetState(new ListMenu());
+        this->context->SetState(new ListMenu(context));
         delete this;
     }
     else if (splitInput[0] == "help")
@@ -53,7 +53,7 @@ bool MainMenu::ParseInput(std::string input)
     else if (splitInput[0] == "settings")
     {
         // Change state to SettingsMenu
-        this->context->SetState(new SettingsMenu());
+        this->context->SetState(new SettingsMenu(context));
         delete this;
     }
     else if (splitInput[0] == "save")
