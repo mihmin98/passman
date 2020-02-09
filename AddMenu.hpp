@@ -14,7 +14,7 @@ class AddMenu : public Menu
 public:
     AddMenu(MenuContext *context);
     void Run(MenuContext *context) override;
-
+    bool ParseInput(std::string input) override;
 private:
 };
 #endif

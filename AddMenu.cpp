@@ -75,3 +75,8 @@ void AddMenu::Run(MenuContext *context)
     context->SetState(new MainMenu(context));
     delete this;
 }
+
+bool AddMenu::ParseInput(std::string input)
+{
+    return true;
+}
