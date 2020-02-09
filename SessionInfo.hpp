@@ -31,6 +31,7 @@ public:
     bool GetUnsavedChanges();
     std::string GetFilename();
     std::vector<LoginInfo *> GetLoginInfoVector();
+    std::vector<LoginInfo> GetLoginInfoVectorCopy();
 
     // Changes to the LoginInfo vector must be done with these methods
 

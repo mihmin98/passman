@@ -77,6 +77,17 @@ std::vector<LoginInfo *> SessionInfo::GetLoginInfoVector()
     return this->loginInfoVector;
 }
 
+std::vector<LoginInfo> GetLoginInfoVectorCopy()
+{
+    std::vector<LoginInfo> v;
+    for (std::vector<LoginInfo *>::iterator it = this->loginInfoVector.begin(); it != this->loginInfoVector.end(); std::advance(it, 1))
+    {
+        v.push_back(*(*it));
+    }
+
+    return v;
+}
+
 void SessionInfo::AddLoginInfoVector(LoginInfo toAdd)
 {
     this->loginInfoVector.push_back(new LoginInfo(toAdd));
