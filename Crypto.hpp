@@ -13,7 +13,7 @@
 class Crypto
 {
 public:
-    static std::uint8_t *Encrypt(std::vector<LoginInfo> &v, std::string key);
+    static std::uint8_t *Encrypt(std::vector<LoginInfo> &v, std::string key, std::uintmax_t &dataSize);
     static std::vector<LoginInfo> Decrypt(std::uint8_t *data, std::uintmax_t size, std::string key);
 private:
     static std::uint8_t *HashKey(std::string key);

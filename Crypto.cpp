@@ -1,7 +1,7 @@
 #include "Crypto.hpp"
 #include <memory>
 
-std::uint8_t *Crypto::Encrypt(std::vector<LoginInfo> &v, std::string key)
+std::uint8_t *Crypto::Encrypt(std::vector<LoginInfo> &v, std::string key, std::uintmax_t &dataSize)
 {
     std::uintmax_t size = 0;
     // For each element we add a uint16_t that specifies the length in bytes of the encrypted element and the size of a sha256 hash
@@ -16,6 +16,7 @@ std::uint8_t *Crypto::Encrypt(std::vector<LoginInfo> &v, std::string key)
         padSize = AES_BLOCKLEN - (size % AES_BLOCKLEN);
 
     std::uint8_t *data = new uint8_t[size + padSize];
+    dataSize = size + padSize;
     std::uint8_t *p = data;
 
     // Serialize elements and copy/move them
