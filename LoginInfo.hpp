@@ -24,6 +24,7 @@ public:
     std::string GetUsername();
     std::string GetPassword();
     std::string GetExtraInfo();
+    std::string GetString();
     std::uint16_t GetPlatformLength();
     std::uint16_t GetUsernameLength();
     std::uint16_t GetPasswordLength();

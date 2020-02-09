@@ -113,6 +113,18 @@ std::string LoginInfo::GetExtraInfo()
     return this->extraInfo;
 }
 
+std::string LoginInfo::GetString()
+{
+    std::string s;
+
+    s += "Platform: " + this->platform;
+    s += "\nUsername: " + this->username;
+    s += "\nPassword: " + this->password;
+    s += "\nExtra Info: " + this->extraInfo;
+
+    return s;
+}
+
 std::uint16_t LoginInfo::GetPlatformLength()
 {
     return this->GetPlatformLength;
