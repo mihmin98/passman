@@ -6,6 +6,7 @@
 #include "MenuContext.hpp"
 #include "SessionInfo.hpp"
 #include "Crypto.hpp"
+#include "MainMenu.hpp"
 #include <iostream>
 #include <experimental/filesystem>
 #include <fstream>

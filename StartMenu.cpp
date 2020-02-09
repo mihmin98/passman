@@ -130,11 +130,12 @@ bool StartMenu::OpenFile()
     int fileIndex;
 
     std::cin >> fileIndex;
-    while (fileIndex < 0 && fileIndex >= validFiles.size())
+    while (fileIndex < 1 && fileIndex > validFiles.size())
     {
         std::cout << "Invalid input\n> ";
         std::cin >> fileIndex;
     }
+    fileIndex--;
 
     // ask for key
     std::string key;
