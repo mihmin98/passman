@@ -5,6 +5,7 @@
 #include "Menu.hpp"
 #include "MenuContext.hpp"
 #include "MainMenu.hpp"
+#include <cctype>
 
 class ListMenu : public Menu
 {
@@ -15,9 +16,10 @@ public:
 
 private:
     MenuContext *context;
+    std::vector<LoginInfo *> itemsToDisplay;
 
     std::vector<std::string> SplitString(std::string str, char delim);
-    std::vector<LoginInfo *> itemsToDisplay;
+    bool IsNumber(std::string str);     
     void DisplayMenu();
 };
 
