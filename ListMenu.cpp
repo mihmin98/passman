@@ -20,6 +20,17 @@ void ListMenu::Run(MenuContext *context)
     }
 }
 
+void ListMenu::DisplayMenu()
+{
+    // Get max length for each column
+    // I think I won't display extra info in this menu
+    int maxPlatform = 0, maxUsername = 0, maxPassword = 0;
+
+    
+
+    std::cout << "\t\tPassMan\n\n";
+}
+
 bool ListMenu::ParseInput(std::string input)
 {
     //valid options:
@@ -31,11 +42,24 @@ bool ListMenu::ParseInput(std::string input)
     if (this->IsNumber(splitInput[0]))
     {
         // view item
-        //TODO: chenge context to viewitem
+        // TODO: chenge context to viewitem
     }
     else if (splitInput[0] == "delete" && this->IsNumber(splitInput[1]))
     {
         // delete item
+        // the numbers are displayed from 1..n
+        int num = std::stoi(splitInput[1]);
+        if (num > 0 && num <= this->itemsToDisplay.size())
+        {
+            num--;
+            SessionInfo *session = SessionInfo::GetInstance();
+            LoginInfo *toDelete = itemsToDisplay[num];
+            session->RemoveLoginInfoVector(toDelete);
+        }
+        else
+        {
+            std::cout << "Invalid input\n";
+        }
     }
     else
     {
