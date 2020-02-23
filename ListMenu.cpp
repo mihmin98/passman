@@ -22,11 +22,57 @@ void ListMenu::Run(MenuContext *context)
 
 void ListMenu::DisplayMenu()
 {
-    // Get max length for each column
+    // Get max length for each column to determine padding
     // I think I won't display extra info in this menu
-    int maxPlatform = 0, maxUsername = 0, maxPassword = 0;
+    int maxPlatform = 8, maxUsername = 8, maxPassword = 8;
+    for (std::vector<LoginInfo *>::iterator it = itemsToDisplay.begin(); it != itemsToDisplay.end(); std::advance(it, 1))
+    {
+        if ((*it)->GetPlatformLength() > maxPlatform)
+            maxPlatform = (*it)->GetPlatformLength();
 
-    
+        if ((*it)->GetUsernameLength() > maxUsername)
+            maxUsername = (*it)->GetUsernameLength();
+
+        if ((*it)->GetPasswordLength() > maxPassword)
+            maxPassword = (*it)->GetPasswordLength();
+    }
+
+    std::string displayString = "";
+
+    // Platform | Username | Password
+    // First row
+    std::string temp;
+    //temp = 
+    temp = "Platform";
+    this->AddRightPadding(temp, maxPlatform, ' ');
+    displayString += temp + " | ";
+    temp = "Username";
+    this->AddRightPadding(temp, maxUsername, ' ');
+    displayString += temp + " | ";
+    temp = "Password";
+    this->AddRightPadding(temp, maxPassword, ' ');
+    displayString += temp + "\n";
+
+    displayString.append(maxPlatform + 3 + maxUsername + 3 + maxPassword, '-');
+    displayString += "\n";
+
+
+    for(std::vector<LoginInfo *>::iterator it = itemsToDisplay.begin(); it != itemsToDisplay.end(); std::advance(it, 1))
+    {
+        // TODO: Add index at the beginning of the row
+        temp = (*it)->GetPlatform();
+        this->AddRightPadding(temp, maxPlatform, ' ');
+        displayString += temp + " | ";
+
+        temp = (*it)->GetUsername();
+        this->AddRightPadding(temp, maxUsername, ' ');
+        displayString += temp + " | ";
+
+        temp = (*it)->GetPassword();
+        this->AddRightPadding(temp, maxPassword, ' ');
+        displayString += temp + "\n";
+
+    }
 
     std::cout << "\t\tPassMan\n\n";
 }
@@ -89,4 +135,13 @@ bool ListMenu::IsNumber(std::string str)
             return false;
 
     return true;
+}
+
+std::string ListMenu::AddRightPadding(std::string str, int num, char padChar)
+{
+    if (str.length() >= 0)
+        return str;
+
+    str.append(num - str.size(), padChar);
+    return str;
 }
