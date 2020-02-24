@@ -39,11 +39,10 @@ void ListMenu::DisplayMenu()
 
     std::string displayString = "";
 
-    // Platform | Username | Password
+    // Index | Platform | Username | Password
     // First row
     std::string temp;
-    //temp = 
-    temp = "Platform";
+    temp = "Index | Platform";
     this->AddRightPadding(temp, maxPlatform, ' ');
     displayString += temp + " | ";
     temp = "Username";
@@ -57,9 +56,13 @@ void ListMenu::DisplayMenu()
     displayString += "\n";
 
 
+    int index = 1;
     for(std::vector<LoginInfo *>::iterator it = itemsToDisplay.begin(); it != itemsToDisplay.end(); std::advance(it, 1))
     {
-        // TODO: Add index at the beginning of the row
+        temp = std::to_string(index++) + ")";
+        this->AddRightPadding(temp, 5, ' ');
+        displayString += temp + " | ";
+
         temp = (*it)->GetPlatform();
         this->AddRightPadding(temp, maxPlatform, ' ');
         displayString += temp + " | ";
@@ -71,10 +74,9 @@ void ListMenu::DisplayMenu()
         temp = (*it)->GetPassword();
         this->AddRightPadding(temp, maxPassword, ' ');
         displayString += temp + "\n";
-
     }
 
-    std::cout << "\t\tPassMan\n\n";
+    std::cout << "\t\tPassMan\n\n" << displayString << "\n> ";
 }
 
 bool ListMenu::ParseInput(std::string input)
@@ -137,6 +139,7 @@ bool ListMenu::IsNumber(std::string str)
     return true;
 }
 
+/*
 std::string ListMenu::AddRightPadding(std::string str, int num, char padChar)
 {
     if (str.length() >= 0)
@@ -144,4 +147,13 @@ std::string ListMenu::AddRightPadding(std::string str, int num, char padChar)
 
     str.append(num - str.size(), padChar);
     return str;
+}
+*/
+
+void ListMenu::AddRightPadding(std::string &str, int num, char padChar)
+{
+    if (str.length() >= 0)
+        return;
+
+    str.append(num - str.size(), padChar);
 }
