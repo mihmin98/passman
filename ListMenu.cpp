@@ -90,7 +90,9 @@ bool ListMenu::ParseInput(std::string input)
     if (this->IsNumber(splitInput[0]))
     {
         // view item
-        // TODO: chenge context to viewitem
+        int index = std::stoi(splitInput[0]) - 1;
+        this->context->SetState(new ViewMenu(this->context, itemsToDisplay[index]));
+        delete this;
     }
     else if (splitInput[0] == "delete" && this->IsNumber(splitInput[1]))
     {
@@ -109,6 +111,12 @@ bool ListMenu::ParseInput(std::string input)
             std::cout << "Invalid input\n";
         }
     }
+    else if (splitInput[0] == "exit" || splitInput[0] == "return" || splitInput[0] == "q")
+    {
+        this->context->SetState(new MainMenu(this->context));
+        delete this;
+    }
+
     else
     {
         std::cout << "\nInvalid command";

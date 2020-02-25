@@ -5,6 +5,7 @@
 #include "Menu.hpp"
 #include "MenuContext.hpp"
 #include "MainMenu.hpp"
+#include "ViewMenu.hpp"
 #include <cctype>
 
 class ListMenu : public Menu
