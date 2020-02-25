@@ -12,6 +12,7 @@
 #include <fstream>
 #include <cstdint>
 
+namespace fs = std::experimental::filesystem;
 class StartMenu : public Menu
 {
 public:
