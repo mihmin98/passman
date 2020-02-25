@@ -77,7 +77,7 @@ std::vector<LoginInfo *> SessionInfo::GetLoginInfoVector()
     return this->loginInfoVector;
 }
 
-std::vector<LoginInfo> GetLoginInfoVectorCopy()
+std::vector<LoginInfo> SessionInfo::GetLoginInfoVectorCopy()
 {
     std::vector<LoginInfo> v;
     for (std::vector<LoginInfo *>::iterator it = this->loginInfoVector.begin(); it != this->loginInfoVector.end(); std::advance(it, 1))
