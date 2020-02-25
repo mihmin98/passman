@@ -65,28 +65,28 @@ LoginInfo::LoginInfo(std::uint8_t *data)
         this->extraInfo[i] = *p;
 }
 
-void LoginInfo::SetPlatform(std::string platform, bool calcLength = true)
+void LoginInfo::SetPlatform(std::string platform, bool calcLength)
 {
     this->platform = platform;
     if (calcLength)
         this->platformLength = this->platform.length() + 1;
 }
 
-void LoginInfo::SetUsername(std::string username, bool calcLength = true)
+void LoginInfo::SetUsername(std::string username, bool calcLength)
 {
     this->username = username;
     if (calcLength)
         this->usernameLength = this->username.length() + 1;
 }
 
-void LoginInfo::SetPassword(std::string password, bool calcLength = true)
+void LoginInfo::SetPassword(std::string password, bool calcLength)
 {
     this->password = password;
     if (calcLength)
         this->passwordLength = this->password.length() + 1;
 }
 
-void LoginInfo::SetExtraInfo(std::string extraInfo, bool calcLength = true)
+void LoginInfo::SetExtraInfo(std::string extraInfo, bool calcLength)
 {
     this->extraInfo = extraInfo;
     if (calcLength)
@@ -127,7 +127,7 @@ std::string LoginInfo::GetString()
 
 std::uint16_t LoginInfo::GetPlatformLength()
 {
-    return this->GetPlatformLength;
+    return this->platformLength;
 }
 
 std::uint16_t LoginInfo::GetUsernameLength()
