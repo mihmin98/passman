@@ -50,7 +50,7 @@ void AddMenu::Run(MenuContext *context)
 
     // get extra info
     input = "";
-    std::cout << "\nEnter Username: ";
+    std::cout << "\nEnter Extra Info: ";
     std::getline(std::cin, input);
 
     login->SetExtraInfo(input);
