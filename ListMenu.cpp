@@ -126,7 +126,7 @@ bool ListMenu::ParseInput(std::string input)
     return true;
 }
 
-std::vector<std::string> SplitString(std::string str, char delim)
+std::vector<std::string> ListMenu::SplitString(std::string str, char delim)
 {
     std::vector<std::string> split;
     std::string x;
