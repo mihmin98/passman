@@ -1,5 +1,6 @@
 #include "Crypto.hpp"
 #include <memory>
+#include <iostream>
 
 std::uint8_t *Crypto::Encrypt(std::vector<LoginInfo> &v, std::string key, std::uintmax_t &dataSize)
 {
@@ -23,6 +24,7 @@ std::uint8_t *Crypto::Encrypt(std::vector<LoginInfo> &v, std::string key, std::u
     for (std::vector<LoginInfo>::iterator it = v.begin(); it != v.end(); std::advance(it, 1))
     {
         std::uint16_t elementSize = it->GetSize();
+        std::cout << "Element Size Encrypt: " << elementSize << "\n";
         std::memcpy(p, &elementSize, sizeof(uint16_t));
         p += sizeof(uint16_t);
 
@@ -82,7 +84,9 @@ std::vector<LoginInfo> Crypto::Decrypt(std::uint8_t *data, std::uintmax_t size, 
     // Add each element to the vector
     while (p < dataEnd)
     {
-        std::uint16_t *elementSize = (std::uint16_t *)((void *)p); // I don't know if there is a better way to do this, maybe static_cast ??
+        //std::uint16_t *elementSize = (std::uint16_t *)((void *)(p)); // I don't know if there is a better way to do this, maybe static_cast ??
+        std::uint16_t *elementSize = ((std::uint16_t *)(void *)p); // I don't know if there is a better way to do this, maybe static_cast ??
+        std::cout << "Element Size Decrypt: " << *elementSize << "\n";
         p += sizeof(std::uint16_t);
 
         // Hash 1 is the hash stored in the file
@@ -99,6 +103,8 @@ std::vector<LoginInfo> Crypto::Decrypt(std::uint8_t *data, std::uintmax_t size, 
             throw 1;
 
         v.push_back(LoginInfo(elementData));
+
+        delete[] sha256Hash2;
     }
 
     return v;
@@ -108,6 +114,7 @@ std::vector<LoginInfo> Crypto::Decrypt(std::uint8_t *data, std::uintmax_t size, 
 std::uint8_t *Crypto::HashKey(std::string key)
 {
     std::unique_ptr<std::uint8_t[]> keyBuf(new uint8_t[key.length()]);
+    std::memcpy(keyBuf.get(), key.c_str(), key.length());
     return Crypto::HashData(keyBuf.get(), key.length());
 }
 

@@ -25,9 +25,7 @@ void StartMenu::Run(MenuContext *context)
         this->DisplayMenu();
         std::getline(std::cin, input);
         if (ParseInput(input))
-        {
             break;
-        }
     }
 
     context->SetState(new MainMenu(context));
@@ -94,7 +92,7 @@ bool StartMenu::NewFile()
     }
 
     // Get key
-    std::cout << "\n\n Enter the key\n >";
+    std::cout << "\n\n Enter the key\n> ";
     std::string key;
     std::getline(std::cin, key);
 
@@ -157,8 +155,10 @@ bool StartMenu::OpenFile()
     }
     catch (int e)
     {
-        if (e == 10)
+        if (e == 1) {
             std::cout << "Hashes are not equal\n";
+            std::cin.get();
+        }
         return false;
     }
 
