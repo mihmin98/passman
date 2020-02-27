@@ -165,6 +165,8 @@ bool MainMenu::Save()
     f.write((char *)encryptedData, dataSize);
     f.close();
 
+    session->SetUnsavedChanges(false);
+
     delete[] encryptedData;
 
     return true;
