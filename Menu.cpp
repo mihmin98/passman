@@ -5,16 +5,6 @@
 #include <cstdlib>
 #endif
 
-Menu::MenuState Menu::GetMenuState()
-{
-    return this->menuState;
-}
-
-void Menu::SetMenuState(MenuState menuState)
-{
-    this->menuState = menuState;
-}
-
 void ClearScreen()
 {
 #if defined(__linux__)

@@ -4,27 +4,14 @@
 #pragma once
 #include <string>
 #include <iostream>
+#include "MenuContext.hpp"
 class Menu
 {
 public:
-    enum MenuState
-    {
-        START_MENU, // When you have to select if you want to create or open file
-        MAIN_MENU,  // Main menu after file decryption
-        LIST_ITEMS, // Menu when you list LoginInfo items
-        VIEW_ITEM,  // Menu where you view a specific menu entry
-        SETTINGS    // Menu where you change filename or key
-    };
-
-    MenuState GetMenuState();
-    void SetMenuState(MenuState menuState);
     void ClearScreen();
 
     virtual void Run(MenuContext *context) = 0;
     virtual bool ParseInput(std::string input) = 0;
-
-private:
-    MenuState menuState;
 };
 
 #endif
