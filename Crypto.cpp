@@ -1,6 +1,7 @@
 #include "Crypto.hpp"
 #include <memory>
 #include <iostream>
+#include <cstdio>
 
 std::uint8_t *Crypto::Encrypt(std::vector<LoginInfo> &v, std::string key, std::uintmax_t &dataSize)
 {
@@ -94,7 +95,7 @@ std::vector<LoginInfo> Crypto::Decrypt(std::uint8_t *data, std::uintmax_t size, 
         p += SHA256_BLOCK_SIZE;
 
         std::uint8_t *elementData = p;
-
+        
         // Hash 2 is the hash calculated after decryption to check data integrity
         std::uint8_t *sha256Hash2 = Crypto::HashData(elementData, *elementSize);
 
@@ -105,6 +106,7 @@ std::vector<LoginInfo> Crypto::Decrypt(std::uint8_t *data, std::uintmax_t size, 
         v.push_back(LoginInfo(elementData));
 
         delete[] sha256Hash2;
+        p += *elementSize;
     }
 
     return v;
@@ -140,4 +142,12 @@ void Crypto::AddPadding(std::uint8_t *start, std::uint8_t *end)
         *p = pad;
         p++;
     }
+}
+
+void Crypto::PrintBytes(uint8_t *data, int size)
+{
+    for (int i=0; i<size; i++) {
+        std::printf("%02X ", data[i]);
+    }
+    std::printf("\n");
 }
