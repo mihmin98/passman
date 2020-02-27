@@ -103,7 +103,7 @@ void MainMenu::DisplayMenu()
     std::cout << "Type \"help\" for commands\n\n> ";
 }
 
-std::vector<std::string> SplitString(std::string str, char delim)
+std::vector<std::string> MainMenu::SplitString(std::string str, char delim)
 {
     std::vector<std::string> split;
     std::string x;
