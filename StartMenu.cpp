@@ -165,7 +165,7 @@ bool StartMenu::OpenFile()
     // if ok set session info and return true
     SessionInfo *session = SessionInfo::GetInstance();
     std::string username = validFiles[fileIndex].filename();
-    username.erase(username.length() - 8);  
+    username.erase(username.length() - 8);
     session->SetUsername(username);
     session->SetKey(key);
     session->SetLoginInfoVector(decryptedLoginInfo);
@@ -185,7 +185,7 @@ bool StartMenu::CreateFile(fs::path path)
 {
     std::fstream f(path.filename(), std::fstream::out | std::fstream::trunc);
 
-    if ((f.rdstate() & std::fstream::goodbit) != 0)
+    if (f.good())
     {
         f.close();
         return true;
