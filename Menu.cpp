@@ -10,7 +10,7 @@ Menu::~Menu()
     
 }
 
-void ClearScreen()
+void Menu::ClearScreen()
 {
 #if defined(__linux__)
     std::cout << "\033[2J\033[1;1H";
