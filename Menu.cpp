@@ -18,3 +18,9 @@ void Menu::ClearScreen()
     std::system("cls");
 #endif
 }
+
+void Menu::FlushInputStream(std::istream &stream)
+{
+    stream.clear();
+    stream.ignore(std::numeric_limits<std::streamsize>::max());
+}
