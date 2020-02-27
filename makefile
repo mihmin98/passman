@@ -2,7 +2,7 @@ passman: main.o LoginInfo.o aes.o sha256.o Crypto.o \
 		 SessionInfo.o Menu.o MenuContext.o StartMenu.o \
 		 MainMenu.o SettingsMenu.o AddMenu.o ListMenu.o ViewMenu.o
 
-	g++ -Wall -g -o passman build/main.o build/LoginInfo.o build/aes.o \
+	g++ -Wall -g -o app/passman build/main.o build/LoginInfo.o build/aes.o \
 							build/sha256.o build/Crypto.o \
 							build/SessionInfo.o build/Menu.o \
 							build/MenuContext.o build/StartMenu.o \
