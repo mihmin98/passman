@@ -11,6 +11,7 @@ class Menu
 public:
     void ClearScreen();
 
+    virtual ~Menu();
     virtual void Run(MenuContext *context) = 0;
     virtual bool ParseInput(std::string input) = 0;
 };
