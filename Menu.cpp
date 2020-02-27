@@ -5,6 +5,11 @@
 #include <cstdlib>
 #endif
 
+Menu::~Menu()
+{
+    
+}
+
 void ClearScreen()
 {
 #if defined(__linux__)
