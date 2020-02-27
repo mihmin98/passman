@@ -27,7 +27,7 @@ bool ViewMenu::ParseInput(std::string input)
         EditItem();
     }
     else if (input == "delete" || input == "remove") {
-        std::cout << "n\Are you sure you want to delete this item? (Y/n)\n> ";
+        std::cout << "\nAre you sure you want to delete this item? (Y/n)\n> ";
         std::cin >> input;
         if (input[0] == 'Y' || input[0] == 'y') 
         {
