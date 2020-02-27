@@ -4,7 +4,8 @@
 #pragma once
 #include <string>
 #include <iostream>
-#include "MenuContext.hpp"
+#include "Menu.fwd.hpp"
+#include "MenuContext.fwd.hpp"
 class Menu
 {
 public:
