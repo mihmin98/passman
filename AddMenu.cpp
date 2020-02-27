@@ -10,6 +10,8 @@ void AddMenu::Run(MenuContext *context)
     LoginInfo *login = new LoginInfo;
     std::string input = "";
 
+    this->ClearScreen();
+
     // get platform
     std::cout << "\t\tPassMan\n\tAdd new entry\n\nEnter Platfrom name: ";
     std::getline(std::cin, input);
