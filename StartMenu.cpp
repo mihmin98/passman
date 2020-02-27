@@ -120,12 +120,12 @@ bool StartMenu::OpenFile()
     }
 
     // make user select one of them by index number
-    for (int i = 0; i < validFiles.size(); i++)
+    for (long unsigned int i = 0; i < validFiles.size(); i++)
         std::cout << i + 1 << ". " << validFiles[i].filename() << "\n";
 
     std::cout << "\n> ";
 
-    int fileIndex;
+    long unsigned int fileIndex;
 
     std::cin >> fileIndex;
     while (fileIndex < 1 && fileIndex > validFiles.size())

@@ -98,7 +98,7 @@ bool ListMenu::ParseInput(std::string input)
     {
         // delete item
         // the numbers are displayed from 1..n
-        int num = std::stoi(splitInput[1]);
+        long unsigned int num = std::stoi(splitInput[1]);
         if (num > 0 && num <= this->itemsToDisplay.size())
         {
             num--;
@@ -140,7 +140,7 @@ std::vector<std::string> ListMenu::SplitString(std::string str, char delim)
 
 bool ListMenu::IsNumber(std::string str)
 {
-    for (int i = 0; i < str.length(); i++)
+    for (long unsigned int i = 0; i < str.length(); i++)
         if (!std::isdigit(str[i]))
             return false;
 
