@@ -87,6 +87,11 @@ bool ListMenu::ParseInput(std::string input)
 
     std::vector<std::string> splitInput = this->SplitString(input, ' ');
 
+    if (input == "" || input == "\n") {
+        // If input is empty, do notihng
+        return true;
+    }
+
     if (this->IsNumber(splitInput[0]))
     {
         // view item

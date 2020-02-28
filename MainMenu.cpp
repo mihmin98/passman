@@ -32,6 +32,11 @@ bool MainMenu::ParseInput(std::string input)
     // Split the input into words
     std::vector<std::string> splitInput = this->SplitString(input, ' ');
 
+    if (input == "" || input == "\n") {
+        // If input is empty, do notihng
+        return true;
+    }
+
     // The first word selects the action
     // TODO: Maybe add search here
     if (splitInput[0] == "add")

@@ -23,6 +23,11 @@ void ViewMenu::Run(MenuContext *context)
 
 bool ViewMenu::ParseInput(std::string input)
 {
+    if (input == "" || input == "\n") {
+        // If input is empty, do notihng
+        return true;
+    }
+
     if (input == "edit" || input == "e") {
         EditItem();
     }

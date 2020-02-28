@@ -27,6 +27,11 @@ void SettingsMenu::Run(MenuContext *context)
 
 bool SettingsMenu::ParseInput(std::string input)
 {
+    if (input == "" || input == "\n") {
+        // If input is empty, do notihng
+        return true;
+    }
+
     if (input == "1")
     {
         this->ChangeUsername();
