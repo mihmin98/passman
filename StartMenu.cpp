@@ -92,7 +92,7 @@ bool StartMenu::NewFile()
     }
 
     // Get key
-    std::cout << "\n\n Enter the key\n> ";
+    std::cout << "\n\n Enter the key\n\n> ";
     std::string key;
     std::getline(std::cin, key);
 
