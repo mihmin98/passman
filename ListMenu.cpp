@@ -24,7 +24,7 @@ void ListMenu::DisplayMenu()
 {
     // Get max length for each column to determine padding
     // I think I won't display extra info in this menu
-    int maxPlatform = 8, maxUsername = 8, maxPassword = 8;
+    long unsigned int maxPlatform = 8, maxUsername = 8, maxPassword = 8;
     for (std::vector<LoginInfo *>::iterator it = itemsToDisplay.begin(); it != itemsToDisplay.end(); std::advance(it, 1))
     {
         if ((*it)->GetPlatformLength() > maxPlatform)
@@ -163,9 +163,9 @@ std::string ListMenu::AddRightPadding(std::string str, int num, char padChar)
 }
 */
 
-void ListMenu::AddRightPadding(std::string &str, int num, char padChar)
+void ListMenu::AddRightPadding(std::string &str, long unsigned int num, char padChar)
 {
-    if (str.length() >= 0)
+    if (str.length() >= num)
         return;
 
     str.append(num - str.size(), padChar);

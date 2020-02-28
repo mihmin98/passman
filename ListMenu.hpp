@@ -23,7 +23,7 @@ private:
     bool IsNumber(std::string str);     
     void DisplayMenu();
     //std::string AddRightPadding(std::string str, int num, char padChar);
-    void AddRightPadding(std::string &str, int num, char padChar);
+    void AddRightPadding(std::string &str, long unsigned int num, char padChar);
 };
 
 #endif
