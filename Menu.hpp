@@ -11,7 +11,6 @@ class Menu
 {
 public:
     void ClearScreen();
-    void FlushInputStream(std::istream &stream);
 
     virtual ~Menu();
     virtual void Run(MenuContext *context) = 0;

@@ -7,7 +7,6 @@
 
 Menu::~Menu()
 {
-    
 }
 
 void Menu::ClearScreen()
@@ -17,10 +16,4 @@ void Menu::ClearScreen()
 #elif defined(_WIN32)
     std::system("cls");
 #endif
-}
-
-void Menu::FlushInputStream(std::istream &stream)
-{
-    stream.clear();
-    stream.ignore(std::numeric_limits<std::streamsize>::max());
 }
