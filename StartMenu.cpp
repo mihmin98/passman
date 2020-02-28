@@ -21,7 +21,7 @@ void StartMenu::Run(MenuContext *context)
     std::string input;
     while (true)
     {
-        Menu::ClearScreen();
+        this->ClearScreen();
         this->DisplayMenu();
         std::getline(std::cin, input);
         if (ParseInput(input))
@@ -126,19 +126,22 @@ bool StartMenu::OpenFile()
     std::cout << "\n> ";
 
     long unsigned int fileIndex;
-
-    std::cin >> fileIndex;
+    std::string input;
+    
+    std::getline(std::cin, input);
+    fileIndex = std::stoul(input);
     while (fileIndex < 1 && fileIndex > validFiles.size())
     {
         std::cout << "Invalid input\n> ";
-        std::cin >> fileIndex;
+        std::getline(std::cin, input);
+        fileIndex = std::stoul(input);
     }
     fileIndex--;
 
     // ask for key
     std::string key;
     std::cout << "Enter key: ";
-    std::cin >> key;
+    std::getline(std::cin, key);
 
     // read data from file
     std::uintmax_t fileSize = fs::file_size(validFiles[fileIndex]);
