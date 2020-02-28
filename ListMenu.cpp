@@ -152,17 +152,6 @@ bool ListMenu::IsNumber(std::string str)
     return true;
 }
 
-/*
-std::string ListMenu::AddRightPadding(std::string str, int num, char padChar)
-{
-    if (str.length() >= 0)
-        return str;
-
-    str.append(num - str.size(), padChar);
-    return str;
-}
-*/
-
 void ListMenu::AddRightPadding(std::string &str, long unsigned int num, char padChar)
 {
     if (str.length() >= num)
