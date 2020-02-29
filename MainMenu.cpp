@@ -84,7 +84,7 @@ bool MainMenu::ParseInput(std::string input)
 
         if (canExit)
             // Goodbye cruel world, it's over
-            delete this;
+            std::exit(0);
     }
     else
     {

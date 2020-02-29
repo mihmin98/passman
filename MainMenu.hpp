@@ -10,6 +10,7 @@
 #include "SettingsMenu.hpp"
 #include "Crypto.hpp"
 #include <cstdint>
+#include <cstdlib>
 #include <experimental/filesystem>
 #include <iostream>
 #include <fstream>
