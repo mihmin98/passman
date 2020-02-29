@@ -32,7 +32,8 @@ bool MainMenu::ParseInput(std::string input)
     // Split the input into words
     std::vector<std::string> splitInput = this->SplitString(input, ' ');
 
-    if (input == "" || input == "\n") {
+    if (input == "" || input == "\n")
+    {
         // If input is empty, do notihng
         return true;
     }
@@ -68,7 +69,6 @@ bool MainMenu::ParseInput(std::string input)
             std::cout << "Save successful\n";
         else
             std::cout << "Save failed\n";
-
     }
     else if (splitInput[0] == "exit")
     {
@@ -157,9 +157,27 @@ bool MainMenu::Save()
     std::string dateString(dateText);
     std::string backupFilename = session->GetUsername() + "-" + dateString + ".passdat";
 
+    // Check if current file exists (it may not exist after a username change)
+    bool fileExists = fs::exists(filePath);
+
+    if (!fileExists)
+    {
+        std::cout << "Could not create backup file. Continue with save? (Y/n): ";
+        std::string input;
+        std::getline(std::cin, input);
+        if (!(input[0] == 'Y' || input[0] == 'y'))
+        {
+            std::cout << "Save canceled\n";
+            return false;
+        }
+    }
+
     // Copy file
-    fs::path backupPath = fs::current_path() / backupFilename;
-    fs::copy(filePath, backupPath);
+    else
+    {
+        fs::path backupPath = fs::current_path() / backupFilename;
+        fs::copy(filePath, backupPath);
+    }
 
     // Get serialized string
     std::vector<LoginInfo> loginInfoCopy = session->GetLoginInfoVectorCopy();
