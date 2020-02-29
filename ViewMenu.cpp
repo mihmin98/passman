@@ -50,6 +50,7 @@ bool ViewMenu::ParseInput(std::string input)
         std::cout << "Invalid Input\n";
     }
 
+    std::cout << "\nPress ENTER to continue...";
     std::cin.get();
     return true;
 }

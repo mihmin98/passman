@@ -70,6 +70,7 @@ void AddMenu::Run(MenuContext *context)
         session->SetUnsavedChanges(true);
 
         std::cout << "Entry added successfully\n";
+        std::cout << "\nPress ENTER to continue...";
         std::cin.get();
     }
 

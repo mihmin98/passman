@@ -71,6 +71,7 @@ bool StartMenu::NewFile()
         else
         {
             std::cout << "\n Invalid input";
+            std::cout << "\nPress ENTER to continue...";
             std::cin.get();
             return false;
         }
@@ -79,6 +80,7 @@ bool StartMenu::NewFile()
     if (!canCreateFile)
     {
         std::cout << "\n Could not create file";
+        std::cout << "\nPress ENTER to continue...";
         std::cin.get();
         return false;
     }
@@ -87,6 +89,7 @@ bool StartMenu::NewFile()
     if (!this->CreateFile(filePath))
     {
         std::cout << "Failed to create file";
+        std::cout << "\nPress ENTER to continue...";
         std::cin.get();
         return false;
     }
@@ -115,6 +118,7 @@ bool StartMenu::OpenFile()
     if (validFiles.size() == 0)
     {
         std::cout << "No files in folder";
+        std::cout << "\nPress ENTER to continue...";
         std::cin.get();
         return false;
     }
@@ -160,6 +164,7 @@ bool StartMenu::OpenFile()
     {
         if (e == 1) {
             std::cout << "Hashes are not equal\n";
+            std::cout << "\nPress ENTER to continue...";
             std::cin.get();
         }
         return false;

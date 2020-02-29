@@ -50,6 +50,7 @@ bool SettingsMenu::ParseInput(std::string input)
     {
         // Invalid input
         std::cout << "Invalid input\n";
+        std::cout << "\nPress ENTER to continue...";
         std::cin.get();
     }
 
@@ -88,6 +89,7 @@ void SettingsMenu::ChangeKey()
     if (input != session->GetKey())
     {
         std::cout << "Keys do not match";
+        std::cout << "\nPress ENTER to continue...";
         std::cin.get();
         return;
     }
@@ -103,6 +105,7 @@ void SettingsMenu::ChangeKey()
     if (newKey1 != newKey2)
     {
         std::cout << "Keys do not match";
+        std::cout << "\nPress ENTER to continue...";
         std::cin.get();
         return;
     }

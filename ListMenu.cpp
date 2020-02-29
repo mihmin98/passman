@@ -127,6 +127,7 @@ bool ListMenu::ParseInput(std::string input)
         std::cout << "\nInvalid command";
     }
 
+    std::cout << "\nPress ENTER to continue...";
     std::cin.get();
     return true;
 }

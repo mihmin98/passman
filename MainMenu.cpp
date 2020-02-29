@@ -91,6 +91,7 @@ bool MainMenu::ParseInput(std::string input)
         std::cout << "\nInvalid command";
     }
 
+    std::cout << "\nPress ENTER to continue...";
     std::cin.get();
 
     // I don't think the return value is actually used here
