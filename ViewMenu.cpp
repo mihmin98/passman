@@ -12,7 +12,7 @@ void ViewMenu::Run(MenuContext *context)
 {
     std::string input;
 
-    while(true)
+    while (true)
     {
         this->ClearScreen();
         this->DisplayItem();
@@ -23,18 +23,21 @@ void ViewMenu::Run(MenuContext *context)
 
 bool ViewMenu::ParseInput(std::string input)
 {
-    if (input == "" || input == "\n") {
+    if (input == "" || input == "\n")
+    {
         // If input is empty, do notihng
         return true;
     }
 
-    if (input == "edit" || input == "e") {
+    if (input == "edit" || input == "e")
+    {
         EditItem();
     }
-    else if (input == "delete" || input == "remove") {
+    else if (input == "delete" || input == "remove")
+    {
         std::cout << "\nAre you sure you want to delete this item? (Y/n)\n> ";
         std::getline(std::cin, input);
-        if (input[0] == 'Y' || input[0] == 'y') 
+        if (input[0] == 'Y' || input[0] == 'y')
         {
             RemoveItem();
             // Change state to ListMenu
@@ -42,11 +45,13 @@ bool ViewMenu::ParseInput(std::string input)
             delete this;
         }
     }
-    else if (input[0] == 'q') {
+    else if (input[0] == 'q')
+    {
         this->context->SetState(new ListMenu(this->context));
         delete this;
     }
-    else {
+    else
+    {
         std::cout << "Invalid Input\n";
     }
 
@@ -65,8 +70,9 @@ void ViewMenu::DisplayItem()
 void ViewMenu::EditItem()
 {
     std::string platform, username, password, extraInfo;
-    
-    // Platform 
+    bool changes = false;
+
+    // Platform
     std::cout << "\nEnter new platfrom name (Leave empty to keep)\n> ";
     std::getline(std::cin, platform);
 
@@ -74,29 +80,40 @@ void ViewMenu::EditItem()
     std::cout << "\nEnter new username (Leave empty to keep)\n> ";
     std::getline(std::cin, username);
 
-    // Password 
+    // Password
     std::cout << "\nEnter new password (Leave empty to keep)\n> ";
     std::getline(std::cin, password);
 
-    // ExtraInfo 
+    // ExtraInfo
     std::cout << "\nEnter new extra info (Leave empty to keep)\n> ";
     std::getline(std::cin, extraInfo);
 
-    if (!(platform == "" || platform  == "\n")) {
+    if (!(platform == "" || platform == "\n"))
+    {
         currentItem->SetPlatform(platform);
+        changes = true;
     }
 
-    if (!(username == "" || username  == "\n")) {
+    if (!(username == "" || username == "\n"))
+    {
         currentItem->SetUsername(username);
+        changes = true;
     }
 
-    if (!(password == "" || password  == "\n")) {
+    if (!(password == "" || password == "\n"))
+    {
         currentItem->SetPassword(password);
+        changes = true;
     }
 
-    if (!(extraInfo == "" || extraInfo  == "\n")) {
+    if (!(extraInfo == "" || extraInfo == "\n"))
+    {
         currentItem->SetExtraInfo(extraInfo);
+        changes = true;
     }
+
+    if (changes)
+        SessionInfo::GetInstance()->SetUnsavedChanges(true);
 }
 
 void ViewMenu::RemoveItem()
