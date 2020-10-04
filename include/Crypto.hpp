@@ -7,8 +7,8 @@
 #include <string>
 #include <vector>
 #include "LoginInfo.hpp"
-#include "aes/aes.hpp"
-#include "sha256/sha256.hpp"
+#include "aes.hpp"
+#include "sha256.hpp"
 
 class Crypto
 {
