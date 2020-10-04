@@ -150,10 +150,10 @@ bool MainMenu::Save()
     std::string filename = session->GetFilename();
     fs::path filePath = fs::current_path() / filename;
 
-    //date string format: yyyymmdd_hhmmss
+    //date string format: yyyy-mm-dd_hh-mm-ss
     std::time_t t = std::time(nullptr);
-    char dateText[16];
-    std::strftime(dateText, 15, "%Y%m%d_%H%M%S", std::localtime(&t));
+    char dateText[20];
+    std::strftime(dateText, 20, "%F_%H-%M-%S", std::localtime(&t));
     std::string dateString(dateText);
     std::string backupFilename = session->GetUsername() + "-" + dateString + ".passdat";
 
