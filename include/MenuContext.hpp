@@ -2,9 +2,9 @@
 #define _MENU_CONTEXT_HPP_
 
 #pragma once
-#include "MenuContext.fwd.hpp"
-#include "Menu.fwd.hpp"
 #include "StartMenu.hpp"
+
+class Menu;
 
 class MenuContext
 {

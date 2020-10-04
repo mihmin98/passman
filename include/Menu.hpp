@@ -5,8 +5,9 @@
 #include <string>
 #include <iostream>
 #include <limits>
-#include "Menu.fwd.hpp"
-#include "MenuContext.fwd.hpp"
+
+class MenuContext;
+
 class Menu
 {
 public:
