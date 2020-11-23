@@ -11,9 +11,9 @@ Menu::~Menu()
 
 void Menu::ClearScreen()
 {
-#if defined(__linux__)
+#ifdef __linux__
     std::cout << "\033[2J\033[1;1H";
-#elif defined(_WIN32)
+#elif _WIN32
     std::system("cls");
 #endif
 }
