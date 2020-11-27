@@ -12,6 +12,13 @@
 #include <fstream>
 #include <cstdint>
 
+// For hiding the password input
+#ifdef __linux__
+#include <unistd.h>
+#elif _WIN32
+#include <windows.h>
+#endif
+
 namespace fs = std::experimental::filesystem;
 class StartMenu : public Menu
 {
@@ -29,6 +36,8 @@ private:
     bool CreateFile(fs::path path);
     bool CreateFile(std::string path);
     std::vector<fs::path> GetListOfFiles();
+    
+    std::string InputPassword();
 };
 
 #endif

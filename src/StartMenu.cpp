@@ -2,10 +2,7 @@
 
 namespace fs = std::experimental::filesystem;
 
-StartMenu::StartMenu(MenuContext *context)
-{
-    this->Run(context);
-}
+StartMenu::StartMenu(MenuContext *context) { this->Run(context); }
 
 void StartMenu::Run(MenuContext *context)
 {
@@ -19,8 +16,7 @@ void StartMenu::Run(MenuContext *context)
     // If somethin is bad restart loop
 
     std::string input;
-    while (true)
-    {
+    while (true) {
         this->ClearScreen();
         this->DisplayMenu();
         std::getline(std::cin, input);
@@ -55,21 +51,15 @@ bool StartMenu::NewFile()
     // Check if file already exists
     bool canCreateFile = true;
 
-    if (fs::exists(filePath))
-    {
+    if (fs::exists(filePath)) {
         std::cout << "\n There is a file with the same name.\n Overwrite? (y/n)\n> ";
         std::string input;
         std::getline(std::cin, input);
-        if (input[0] == 'y' || input[0] == 'Y')
-        {
+        if (input[0] == 'y' || input[0] == 'Y') {
             canCreateFile = true;
-        }
-        else if (input[0] == 'n' || input[0] == 'N')
-        {
+        } else if (input[0] == 'n' || input[0] == 'N') {
             canCreateFile = false;
-        }
-        else
-        {
+        } else {
             std::cout << "\n Invalid input";
             std::cout << "\nPress ENTER to continue...";
             std::cin.get();
@@ -77,8 +67,7 @@ bool StartMenu::NewFile()
         }
     }
 
-    if (!canCreateFile)
-    {
+    if (!canCreateFile) {
         std::cout << "\n Could not create file";
         std::cout << "\nPress ENTER to continue...";
         std::cin.get();
@@ -86,8 +75,7 @@ bool StartMenu::NewFile()
     }
 
     // Try to create file
-    if (!this->CreateFile(filePath))
-    {
+    if (!this->CreateFile(filePath)) {
         std::cout << "Failed to create file";
         std::cout << "\nPress ENTER to continue...";
         std::cin.get();
@@ -115,8 +103,7 @@ bool StartMenu::OpenFile()
     std::vector<fs::path> validFiles = this->GetListOfFiles();
 
     // If there are no valid files, return false
-    if (validFiles.size() == 0)
-    {
+    if (validFiles.size() == 0) {
         std::cout << "No files in folder";
         std::cout << "\nPress ENTER to continue...";
         std::cin.get();
@@ -131,11 +118,10 @@ bool StartMenu::OpenFile()
 
     long unsigned int fileIndex;
     std::string input;
-    
+
     std::getline(std::cin, input);
     fileIndex = std::stoul(input);
-    while (fileIndex < 1 && fileIndex > validFiles.size())
-    {
+    while (fileIndex < 1 && fileIndex > validFiles.size()) {
         std::cout << "Invalid input\n> ";
         std::getline(std::cin, input);
         fileIndex = std::stoul(input);
@@ -144,8 +130,11 @@ bool StartMenu::OpenFile()
 
     // ask for key
     std::string key;
-    std::cout << "Enter key: ";
-    std::getline(std::cin, key);
+    // std::cout << "Enter key: ";
+
+    // // aici ar trebui sa fie o fct
+    // std::getline(std::cin, key);
+    key = InputPassword();
 
     // read data from file
     std::uintmax_t fileSize = fs::file_size(validFiles[fileIndex]);
@@ -156,12 +145,9 @@ bool StartMenu::OpenFile()
 
     // try to decrypt
     std::vector<LoginInfo> decryptedLoginInfo;
-    try
-    {
+    try {
         decryptedLoginInfo = Crypto::Decrypt(data, fileSize, key);
-    }
-    catch (int e)
-    {
+    } catch (int e) {
         if (e == 1) {
             std::cout << "Hashes are not equal\n";
             std::cout << "\nPress ENTER to continue...";
@@ -193,8 +179,7 @@ bool StartMenu::CreateFile(fs::path path)
 {
     std::fstream f(path.filename(), std::fstream::out | std::fstream::trunc);
 
-    if (f.good())
-    {
+    if (f.good()) {
         f.close();
         return true;
     }
@@ -206,8 +191,7 @@ bool StartMenu::CreateFile(std::string path)
 {
     std::fstream f(path, std::fstream::out | std::fstream::trunc);
 
-    if ((f.rdstate() & std::fstream::goodbit) != 0)
-    {
+    if ((f.rdstate() & std::fstream::goodbit) != 0) {
         f.close();
         return true;
     }
@@ -224,4 +208,27 @@ std::vector<fs::path> StartMenu::GetListOfFiles()
             validFiles.push_back(it.path());
 
     return validFiles;
+}
+
+std::string StartMenu::InputPassword()
+{
+#ifdef __linux__
+    char *key = getpass("Enter key: ");
+    return std::string(key);
+#elif _WIN32
+    std::cout << "Enter key: ";
+
+    HANDLE hStdin = GetStdHandle(STD_INPUT_HANDLE);
+    DWORD mode = 0;
+    GetConsoleMode(hStdin, &mode);
+    SetConsoleMode(hStdin, mode & (~ENABLE_ECHO_INPUT));
+
+    std::string s;
+    getline(std::cin, s);
+
+    SetConsoleMode(hStdin, mode);
+    return s;
+#else
+    return "";
+#endif
 }
