@@ -1,17 +1,13 @@
 #include "ListMenu.hpp"
 
-ListMenu::ListMenu(MenuContext *context)
-{
-    this->Run(context);
-}
+ListMenu::ListMenu(MenuContext *context) { this->Run(context); }
 
 void ListMenu::Run(MenuContext *context)
 {
     this->context = context;
     std::string input;
 
-    while (true)
-    {
+    while (true) {
         this->itemsToDisplay = SessionInfo::GetInstance()->GetLoginInfoVector();
         this->ClearScreen();
         this->DisplayMenu();
@@ -24,9 +20,8 @@ void ListMenu::DisplayMenu()
 {
     // Get max length for each column to determine padding
     // I think I won't display extra info in this menu
-    long unsigned int maxPlatform = 8, maxUsername = 8, maxPassword = 8;
-    for (std::vector<LoginInfo *>::iterator it = itemsToDisplay.begin(); it != itemsToDisplay.end(); std::advance(it, 1))
-    {
+    long unsigned int maxIndex = 5, maxPlatform = 8, maxUsername = 8, maxPassword = 8;
+    for (auto it = itemsToDisplay.begin(); it != itemsToDisplay.end(); std::advance(it, 1)) {
         if ((*it)->GetPlatformLength() > maxPlatform)
             maxPlatform = (*it)->GetPlatformLength();
 
@@ -42,25 +37,32 @@ void ListMenu::DisplayMenu()
     // Index | Platform | Username | Password
     // First row
     std::string temp;
-    temp = "Index | Platform";
-    this->AddRightPadding(temp, maxPlatform, ' ');
+    temp = "Index";
+    this->AddRightPadding(temp, maxIndex, ' ');
+    displayString += temp + " | ";
+    temp = "Platform";
+    this->AddRightPadding(temp, maxPlatform - 1, ' ');
     displayString += temp + " | ";
     temp = "Username";
-    this->AddRightPadding(temp, maxUsername, ' ');
+    this->AddRightPadding(temp, maxUsername - 1, ' ');
     displayString += temp + " | ";
     temp = "Password";
-    this->AddRightPadding(temp, maxPassword, ' ');
+    this->AddRightPadding(temp, maxPassword - 1, ' ');
     displayString += temp + "\n";
 
-    displayString.append(maxPlatform + 3 + maxUsername + 3 + maxPassword, '-');
+    displayString.append(maxIndex + 1, '-');
+    displayString += "+";
+    displayString.append(maxPlatform + 1, '-');
+    displayString += "+";
+    displayString.append(maxUsername + 1, '-');
+    displayString += "+";
+    displayString.append(maxPassword + 1, '-');
     displayString += "\n";
 
-
     int index = 1;
-    for(std::vector<LoginInfo *>::iterator it = itemsToDisplay.begin(); it != itemsToDisplay.end(); std::advance(it, 1))
-    {
+    for (auto it = itemsToDisplay.begin(); it != itemsToDisplay.end(); std::advance(it, 1)) {
         temp = std::to_string(index++) + ")";
-        this->AddRightPadding(temp, 5, ' ');
+        this->AddRightPadding(temp, maxIndex, ' ');
         displayString += temp + " | ";
 
         temp = (*it)->GetPlatform();
@@ -81,7 +83,7 @@ void ListMenu::DisplayMenu()
 
 bool ListMenu::ParseInput(std::string input)
 {
-    //valid options:
+    // valid options:
     // num -> view item
     // delete num -> delete item
 
@@ -92,38 +94,29 @@ bool ListMenu::ParseInput(std::string input)
         return true;
     }
 
-    if (this->IsNumber(splitInput[0]))
-    {
+    if (this->IsNumber(splitInput[0])) {
         // view item
         int index = std::stoi(splitInput[0]) - 1;
         this->context->SetState(new ViewMenu(this->context, itemsToDisplay[index]));
         delete this;
-    }
-    else if (splitInput[0] == "delete" && this->IsNumber(splitInput[1]))
-    {
+    } else if (splitInput[0] == "delete" && this->IsNumber(splitInput[1])) {
         // delete item
         // the numbers are displayed from 1..n
         long unsigned int num = std::stoi(splitInput[1]);
-        if (num > 0 && num <= this->itemsToDisplay.size())
-        {
+        if (num > 0 && num <= this->itemsToDisplay.size()) {
             num--;
             SessionInfo *session = SessionInfo::GetInstance();
             LoginInfo *toDelete = itemsToDisplay[num];
             session->RemoveLoginInfoVector(toDelete);
-        }
-        else
-        {
+        } else {
             std::cout << "Invalid input\n";
         }
-    }
-    else if (splitInput[0] == "exit" || splitInput[0] == "return" || splitInput[0] == "q")
-    {
+    } else if (splitInput[0] == "exit" || splitInput[0] == "return" || splitInput[0] == "q") {
         this->context->SetState(new MainMenu(this->context));
         delete this;
     }
 
-    else
-    {
+    else {
         std::cout << "\nInvalid command";
     }
 
